@@ -18,103 +18,65 @@
 import React from "react";
 
 // reactstrap components
-import { Card, CardBody, CardTitle, Container, Row, Col } from "reactstrap";
+import { Card, CardBody, CardTitle, Container, Row, Col, Button } from "reactstrap";
 
 const Header = () => {
-  return (
+  return (  
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
         <Container fluid>
           <div className="header-body">
             {/* Card stats */}
             <Row>
-              <Col lg="6" xl="3">
+              <Col lg="4" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Traffic
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">
-                          350,897
-                        </span>
-                      </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-danger text-white rounded-circle shadow">
-                          <i className="fas fa-chart-bar" />
-                        </div>
-                      </Col>
+                    <div className="col">
+                      <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Place New Request for LOR</CardTitle>
+                    </div>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-success mr-2">
-                        <i className="fa fa-arrow-up" /> 3.48%
-                      </span>{" "}
-                      <span className="text-nowrap">Since last month</span>
-                    </p>
+                    <Row className="align-items-center justify-content-center">
+                      <Button color="default mt-3" type="button">Request LOR</Button>
+
+                    </Row>
+              
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              <Col lg="4" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
+                <CardBody>
                     <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          New users
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">2,356</span>
-                      </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-warning text-white rounded-circle shadow">
-                          <i className="fas fa-chart-pie" />
-                        </div>
-                      </Col>
+                    <div className="col">
+                      <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Get your LOR Approved</CardTitle>
+                    </div>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-danger mr-2">
-                        <i className="fas fa-arrow-down" /> 3.48%
-                      </span>{" "}
-                      <span className="text-nowrap">Since last week</span>
-                    </p>
+                    <Row className="align-items-center justify-content-center">
+                      <Button color="default mt-3" type="button">Approve LOR</Button>
+
+                    </Row>
+              
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              <Col lg="4" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
-                  <CardBody>
+                <CardBody>
                     <Row>
-                      <div className="col">
-                        <CardTitle
-                          tag="h5"
-                          className="text-uppercase text-muted mb-0"
-                        >
-                          Sales
-                        </CardTitle>
-                        <span className="h2 font-weight-bold mb-0">924</span>
-                      </div>
-                      <Col className="col-auto">
-                        <div className="icon icon-shape bg-yellow text-white rounded-circle shadow">
-                          <i className="fas fa-users" />
-                        </div>
-                      </Col>
+                    <div className="col">
+                      <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Know the status of your LOR</CardTitle>
+                    </div>
                     </Row>
-                    <p className="mt-3 mb-0 text-muted text-sm">
-                      <span className="text-warning mr-2">
-                        <i className="fas fa-arrow-down" /> 1.10%
-                      </span>{" "}
-                      <span className="text-nowrap">Since yesterday</span>
-                    </p>
+                    <Row className="align-items-center justify-content-center">
+                      <Button color="default mt-3" type="button">LOR Status</Button>
+
+                    </Row>
+              
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="6" xl="3">
+              {/* <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
@@ -141,7 +103,7 @@ const Header = () => {
                     </p>
                   </CardBody>
                 </Card>
-              </Col>
+              </Col> */}
             </Row>
           </div>
         </Container>
