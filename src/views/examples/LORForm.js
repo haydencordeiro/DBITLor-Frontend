@@ -50,6 +50,32 @@ const LORForm = (props) => {
 
 
 
+
+  
+
+
+  useEffect(() => {
+
+    //   console.log(`Token ${token}`);
+    axios.get(`https://dbit-lor.herokuapp.com/api/loggedinuserdetails/`, {
+      headers: {
+        'Authorization': `Token ${props.token}`
+      }
+    })
+      .then((res) => {
+        // SetTeachers(res.data);
+        console.log(res.data);
+        SetfirstName(res.data.first_name)
+        SetlastName(res.data.last_name)
+        SetstudentEmail(res.data.email)
+        SetpassoutYear(res.data.yearofpassout)
+        SetstudentID(res.data.studentID)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }, [props.token])
+
   useEffect(() => {
 
     //   console.log(`Token ${token}`);
@@ -178,6 +204,7 @@ const LORForm = (props) => {
                             onChange={(e) => SetstudentID(e.target.value)}
                             value={studentID}
                             required
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -196,6 +223,7 @@ const LORForm = (props) => {
                             type="email"
                             onChange={(e) => SetstudentEmail(e.target.value)}
                             value={studentEmail}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -217,6 +245,7 @@ const LORForm = (props) => {
                             type="text"
                             onChange={(e) => SetfirstName(e.target.value)}
                             value={firstName}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -236,6 +265,7 @@ const LORForm = (props) => {
                             type="text"
                             onChange={(e) => SetlastName(e.target.value)}
                             value={lastName}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
@@ -247,7 +277,7 @@ const LORForm = (props) => {
                             className="form-control-label"
                             htmlFor="input-last-name"
                           >Branch</label>
-                          <Input className="form-control-alternative" type="select" name="select" id="input-branch" onChange={(e) => Setbranch(e.target.value)} value={branch} >
+                          <Input className="form-control-alternative" type="select" name="select" id="input-branch" disabled onChange={(e) => Setbranch(e.target.value)} value={branch} >
                             <option>Computer</option>
                             <option>IT</option>
                             <option>EXTC</option>
@@ -271,6 +301,7 @@ const LORForm = (props) => {
                             type="text"
                             onChange={(e) => SetpassoutYear(e.target.value)}
                             value={passoutYear}
+                            disabled
                           />
                         </FormGroup>
                       </Col>
