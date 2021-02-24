@@ -38,7 +38,7 @@ const Header = () => {
                       </div>
                     </Row>
                     <Row className="align-items-center justify-content-center">
-                      <Link to="/request">
+                      <Link to="/admin/lor-request">
                         <Button color="default mt-3" type="button">Request LOR</Button>
                       </Link>
                     </Row>
