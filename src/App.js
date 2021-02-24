@@ -31,6 +31,10 @@ export default function App() {
         
       }
 
+      function LogOut(){
+          SetToken("");
+      }
+
   useEffect(() => {
       
     //   console.log(`Token ${token}`);
@@ -55,9 +59,9 @@ export default function App() {
     return (
         <BrowserRouter>
     <Switch>
-      <Route path="/admin"   render={(props) => <AdminLayout {...props}  user={user}/>} />
+      <Route path="/admin"   render={(props) => <AdminLayout {...props}  user={user} token={token} />} />
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Redirect from="/" to="/admin/index" user={user} />
+      <Redirect from="/" to="/admin/index" user={user}  />
     </Switch>
   </BrowserRouter>
     )

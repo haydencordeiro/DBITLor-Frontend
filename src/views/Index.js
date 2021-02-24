@@ -1,20 +1,4 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { useState, useEffect } from "react";
 // node.js library that concatenates classes (strings)
 // import classnames from "classnames";
@@ -62,22 +46,25 @@ import Header from "components/Headers/Header.js";
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
+  var [application,SetApplication]=useState([]);
 
-  // useEffect(() => {
-  //     var access_token="44c5f2df36420898817d76dde745c18e8c526d54"
-  //     // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
-  //     axios.get(`https://dbit-lor.herokuapp.com/api/loggedinteachersapplications/`, {
-  //       headers: {
-  //         'Authorization': `Token 44c5f2df36420898817d76dde745c18e8c526d54`
-  //       }
-  //     })
-  //     .then((res) => {
-  //       console.log(res.data)
-  //     })
-  //     .catch((error) => {
-  //       console.error(error)
-  //     })
-  //   }, [])
+  useEffect(() => {
+      var access_token="53716934355c0e13967ec968a14440c073dcb51f"
+      // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
+      axios.get(`https://dbit-lor.herokuapp.com/api/loggedinusersapplications/`, {
+        headers: {
+          'Authorization': `Token 53716934355c0e13967ec968a14440c073dcb51f`
+        }
+      })
+      .then((res) => {
+        SetApplication(res.data);
+        // console.log(res.data);
+
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    }, [])
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
@@ -96,6 +83,39 @@ const Index = (props) => {
     verticalAlign: 'top',
     color: 'white'
   };
+ 
+  function historyStatusColor(inp){
+    switch(inp) {
+
+      case "pending":   return <td style={{ color: 'orange' }}>Pending</td>;
+      case "approved":   return <td style={{ color: 'green' }}>Approved</td>;
+      case "rejected": return <td style={{ color: 'red' }}>Rejected</td>;
+    
+
+      default:      return  <td style={{ color: 'blue' }}>Processing</td>
+    }
+  }
+
+  function LastLorStatus(){
+    console.log(application);
+    if (application.length==0){
+      return 0;
+    }
+    else{
+    console.log(application[0].status);
+    
+    switch(application[0].status) {
+
+      case "pending":   return 0;
+      case "approved":   return 1;
+      case "completed": return 2;
+    
+
+      default:      return 0;
+    }
+  }
+  }
+
 
   return (
     <>
@@ -120,11 +140,10 @@ const Index = (props) => {
               <CardBody>
                 <div className="chart">
                   <div className="verticalTimeline">
-                    <Steps current={1} vertical style={timelineStyles}>
-                      <Steps.Item title="Finished" />
-                      <Steps.Item title="In progress" />
-                      <Steps.Item title="Waiting" />
-                      <Steps.Item title="Waiting" />
+                    <Steps current={LastLorStatus()} vertical style={timelineStyles}>
+                      <Steps.Item title="Pending" />
+                      <Steps.Item title="Approved" />
+                      <Steps.Item title="Complete" />
                     </Steps>
                   </div>
                 </div>
@@ -152,11 +171,19 @@ const Index = (props) => {
                       <th>Subject</th>
                       <th>Status</th>
                     </tr>
-                    <tr>
-                      <td>Ms. Ditty Varghese</td>
-                      <td>Algorithms</td>
-                      <td style={{ color: 'green' }}>Approved</td>
-                    </tr>
+
+                    {application.map( (obj,i)=>
+            
+                        <tr>
+                        <td>{obj.teacher.first_name} {obj.teacher.last_name}</td>
+                        <td>{obj.teacher.first_name}</td>
+                        {/* <td style={{ color: 'green' }}>Approved</td> */}
+                        {historyStatusColor(obj.status)}
+                      </tr>
+                      
+                    )}
+                 
+                     {/* 
                     <tr>
                       <td>Mr. Imran Mirza</td>
                       <td>Software Engineering</td>
@@ -176,7 +203,7 @@ const Index = (props) => {
                       <td>Ms. Sana Shaikh</td>
                       <td>Python</td>
                       <td style={{ color: 'green' }}>Approved</td>
-                    </tr>
+                    </tr> */}
                   </table>
                 </div>
               </CardBody>
