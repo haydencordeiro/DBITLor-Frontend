@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React,{useState} from "react";
 
 // reactstrap components
 import {
@@ -33,52 +33,44 @@ import {
   Col,
 } from "reactstrap";
 
-const Login = () => {
+import axios from 'axios';
+import  { Redirect } from 'react-router-dom'
+const Login = (props) => {
+  const [username,Setusername]=useState("");
+  const [password,Setpassword]=useState("");
+  function usernameInp(e){
+    Setusername(e.target.value);
+  }
+  function passInp(e){
+    Setpassword(e.target.value);
+  }
+  function LoginUser(){
+    // props.GetUserToken(username,password);
+    const article = { username:username,password:password };
+    const headers = { 
+        // 'Authorization': 'Bearer my-token',
+        // 'My-Custom-Header': 'foobar'
+    };
+    axios.post('https://dbit-lor.herokuapp.com/token/login/', article, { headers })
+    .then(
+        (response)=>{
+            props.SetToken(response.data.auth_token);
+            console.log("asdfa");
+            props.history.push('/admin')
+            
+        }  
+        )
+        .catch((error) => {
+          console.error(error,"failed to login");
+        });
+    
+  }
+
   return (
     <>
       <Col lg="6" md="8">
         <Card className="bg-secondary shadow border-0">
-          {/* <CardHeader className="bg-transparent pb-5">
-            <div className="text-muted text-center mt-2 mb-3">
-              <small>Sign in with</small>
-            </div>
-            <div className="btn-wrapper text-center">
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={
-                      require("../../assets/img/icons/common/github.svg")
-                        .default
-                    }
-                  />
-                </span>
-                <span className="btn-inner--text">Github</span>
-              </Button>
-              <Button
-                className="btn-neutral btn-icon"
-                color="default"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="btn-inner--icon">
-                  <img
-                    alt="..."
-                    src={
-                      require("../../assets/img/icons/common/google.svg")
-                        .default
-                    }
-                  />
-                </span>
-                <span className="btn-inner--text">Google</span>
-              </Button>
-            </div>
-          </CardHeader> */}
+
           <CardBody className="px-lg-5 py-lg-5">
             <div className="text-center text-muted mb-4">
               {/* <small> */}
@@ -97,6 +89,8 @@ const Login = () => {
                     placeholder="Email"
                     type="email"
                     autoComplete="new-email"
+                    onChange={usernameInp}
+                    value={username}
                   />
                 </InputGroup>
               </FormGroup>
@@ -111,6 +105,8 @@ const Login = () => {
                     placeholder="Password"
                     type="password"
                     autoComplete="new-password"
+                    onChange={passInp}
+                    value={password}
                   />
                 </InputGroup>
               </FormGroup>
@@ -128,7 +124,7 @@ const Login = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button className="my-4" color="primary" type="button" onClick={LoginUser}>
                   Sign in
                 </Button>
               </div>

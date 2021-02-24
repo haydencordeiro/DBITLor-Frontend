@@ -23,7 +23,7 @@ import { Container, Row, Col } from "reactstrap";
 // core components
 import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
-
+import Login from '../views/examples/Login'
 import routes from "routes.js";
 
 const Auth = (props) => {
@@ -95,10 +95,11 @@ const Auth = (props) => {
         {/* Page content */}
         <Container className="mt--8 pb-5">
           <Row className="justify-content-center">
-            <Switch>
+            <Login SetToken={props.SetToken}  {...props}/>
+            {/* <Switch>
               {getRoutes(routes)}
               <Redirect from="*" to="/auth/login" />
-            </Switch>
+            </Switch> */}
           </Row>
         </Container>
       </div>

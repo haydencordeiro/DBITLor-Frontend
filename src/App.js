@@ -16,21 +16,7 @@ export default function App() {
 
     var [token,SetToken]=useState("");
 
-    function GetUserToken(){
 
-        const article = { username:"hayden",password:"XYZ@1234" };
-        const headers = { 
-            // 'Authorization': 'Bearer my-token',
-            // 'My-Custom-Header': 'foobar'
-        };
-        axios.post('https://dbit-lor.herokuapp.com/token/login/', article, { headers })
-        .then(
-            (response)=>{
-                SetToken(response.data.auth_token);
-            }  
-            );
-        
-      }
 
       function LogOut(){
           SetToken("");
@@ -39,6 +25,7 @@ export default function App() {
   useEffect(() => {
       
     //   console.log(`Token ${token}`);
+ 
       axios.get(`https://dbit-lor.herokuapp.com/api/loggedinuserdetails/`, {
         headers: {
           'Authorization': `Token ${token}`
@@ -55,13 +42,13 @@ export default function App() {
 
 
 
-      GetUserToken();
 
     return (
         <BrowserRouter>
     <Switch>
+
       <Route path="/admin"   render={(props) => <AdminLayout {...props}  user={user} token={token} />} />
-      <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
+      <Route path="/" render={(props) => <AuthLayout {...props } SetToken={SetToken} />} />
       <Route path="/admin/lor-request" render={(props) => <LORForm {...props} />} />
 
 
