@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
 // javascipt plugin for creating charts
@@ -23,6 +23,9 @@ import Chart from "chart.js";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 // reactstrap components
+
+import axios from 'axios';
+
 import {
   Button,
   Card,
@@ -52,6 +55,22 @@ import Header from "components/Headers/Header.js";
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
+
+  // useEffect(() => {
+  //     var access_token="44c5f2df36420898817d76dde745c18e8c526d54"
+  //     // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
+  //     axios.get(`https://dbit-lor.herokuapp.com/api/loggedinteachersapplications/`, {
+  //       headers: {
+  //         'Authorization': `Token 44c5f2df36420898817d76dde745c18e8c526d54`
+  //       }
+  //     })
+  //     .then((res) => {
+  //       console.log(res.data)
+  //     })
+  //     .catch((error) => {
+  //       console.error(error)
+  //     })
+  //   }, [])
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
