@@ -25,6 +25,9 @@ import {
   // Nav,
   // Progress,
   // Table,
+  FormGroup,
+  Form,
+  Input,
   Container,
   Row,
   Col,
@@ -46,16 +49,16 @@ import Header from "components/Headers/Header.js";
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
-  var [application,SetApplication]=useState([]);
+  var [application, SetApplication] = useState([]);
 
   useEffect(() => {
-      var access_token="53716934355c0e13967ec968a14440c073dcb51f"
-      // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
-      axios.get(`https://dbit-lor.herokuapp.com/api/loggedinusersapplications/`, {
-        headers: {
-          'Authorization': `Token 53716934355c0e13967ec968a14440c073dcb51f`
-        }
-      })
+    var access_token = "53716934355c0e13967ec968a14440c073dcb51f"
+    // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
+    axios.get(`https://dbit-lor.herokuapp.com/api/loggedinusersapplications/`, {
+      headers: {
+        'Authorization': `Token 53716934355c0e13967ec968a14440c073dcb51f`
+      }
+    })
       .then((res) => {
         SetApplication(res.data);
         // console.log(res.data);
@@ -64,7 +67,7 @@ const Index = (props) => {
       .catch((error) => {
         console.error(error)
       })
-    }, [])
+  }, [])
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());
@@ -83,37 +86,37 @@ const Index = (props) => {
     verticalAlign: 'top',
     color: 'white'
   };
- 
-  function historyStatusColor(inp){
-    switch(inp) {
 
-      case "pending":   return <td style={{ color: 'orange' }}>Pending</td>;
-      case "approved":   return <td style={{ color: 'green' }}>Approved</td>;
+  function historyStatusColor(inp) {
+    switch (inp) {
+
+      case "pending": return <td style={{ color: 'orange' }}>Pending</td>;
+      case "approved": return <td style={{ color: 'green' }}>Approved</td>;
       case "rejected": return <td style={{ color: 'red' }}>Rejected</td>;
-    
 
-      default:      return  <td style={{ color: 'blue' }}>Processing</td>
+
+      default: return <td style={{ color: 'blue' }}>Processing</td>
     }
   }
 
-  function LastLorStatus(){
+  function LastLorStatus() {
     console.log(application);
-    if (application.length==0){
+    if (application.length == 0) {
       return 0;
     }
-    else{
-    console.log(application[0].status);
-    
-    switch(application[0].status) {
+    else {
+      console.log(application[0].status);
 
-      case "pending":   return 0;
-      case "approved":   return 1;
-      case "completed": return 2;
-    
+      switch (application[0].status) {
 
-      default:      return 0;
+        case "pending": return 0;
+        case "approved": return 1;
+        case "completed": return 2;
+
+
+        default: return 0;
+      }
     }
-  }
   }
 
 
@@ -123,7 +126,6 @@ const Index = (props) => {
 
       {/* Page content */}
       <Container className="mt--7" fluid>
-
         <Row>
           <Col className="mb-5 mb-xl-0" xl="8">
             <Card className="bg-gradient-default shadow">
@@ -172,18 +174,18 @@ const Index = (props) => {
                       <th>Status</th>
                     </tr>
 
-                    {application.map( (obj,i)=>
-            
-                        <tr>
+                    {application.map((obj, i) =>
+
+                      <tr>
                         <td>{obj.teacher.first_name} {obj.teacher.last_name}</td>
                         <td>{obj.teacher.first_name}</td>
                         {/* <td style={{ color: 'green' }}>Approved</td> */}
                         {historyStatusColor(obj.status)}
                       </tr>
-                      
+
                     )}
-                 
-                     {/* 
+
+                    {/* 
                     <tr>
                       <td>Mr. Imran Mirza</td>
                       <td>Software Engineering</td>
@@ -210,7 +212,7 @@ const Index = (props) => {
             </Card>
           </Col>
         </Row>
-
+       
       </Container>
     </>
   );

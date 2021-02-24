@@ -16,12 +16,13 @@
 
 */
 import React from "react";
+import {Link } from "react-router-dom";
 
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col, Button } from "reactstrap";
 
 const Header = () => {
-  return (  
+  return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
         <Container fluid>
@@ -32,47 +33,48 @@ const Header = () => {
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
-                    <div className="col">
-                      <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Place New Request for LOR</CardTitle>
-                    </div>
+                      <div className="col">
+                        <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Place New Request for LOR</CardTitle>
+                      </div>
                     </Row>
                     <Row className="align-items-center justify-content-center">
-                      <Button color="default mt-3" type="button">Request LOR</Button>
-
+                      <Link to="/request">
+                        <Button color="default mt-3" type="button">Request LOR</Button>
+                      </Link>
                     </Row>
-              
+
                   </CardBody>
                 </Card>
               </Col>
               <Col lg="4" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
-                <CardBody>
+                  <CardBody>
                     <Row>
-                    <div className="col">
-                      <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Get your LOR Approved</CardTitle>
-                    </div>
+                      <div className="col">
+                        <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Get your LOR Approved</CardTitle>
+                      </div>
                     </Row>
                     <Row className="align-items-center justify-content-center">
                       <Button color="default mt-3" type="button">Approve LOR</Button>
 
                     </Row>
-              
+
                   </CardBody>
                 </Card>
               </Col>
               <Col lg="4" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
-                <CardBody>
+                  <CardBody>
                     <Row>
-                    <div className="col">
-                      <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Know the status of your LOR</CardTitle>
-                    </div>
+                      <div className="col">
+                        <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Know the status of your LOR</CardTitle>
+                      </div>
                     </Row>
                     <Row className="align-items-center justify-content-center">
                       <Button color="default mt-3" type="button">LOR Status</Button>
 
                     </Row>
-              
+
                   </CardBody>
                 </Card>
               </Col>

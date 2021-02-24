@@ -22,6 +22,7 @@ import Register from "views/examples/Register.js";
 import Login from "views/examples/Login.js";
 import Tables from "views/examples/Tables.js";
 import Icons from "views/examples/Icons.js";
+import LORForm from "views/examples/LORForm.js";
 
 var routes = [
   {
@@ -53,6 +54,13 @@ var routes = [
     layout: "/admin",
   },
   {
+    path: "/lor-request",
+    name: "Request LOR",
+    icon: "ni ni-single-02 text-yellow",
+    component: LORForm,
+    layout: "/admin",
+  },
+  {
     path: "/tables",
     name: "Tables",
     icon: "ni ni-bullet-list-67 text-red",
@@ -73,5 +81,6 @@ var routes = [
     component: Register,
     layout: "/auth",
   },
+ 
 ];
 export default routes;
