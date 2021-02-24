@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 // reactstrap components
 import {
@@ -37,19 +37,27 @@ import axios from 'axios'
 
 const LORForm = (props) => {
 
-  var [teachers,SetTeachers]=useState([]);
-  var [selectedTeacher,SetSelectedTeacher]=useState(null);
+  var [studentID, SetstudentID] = useState("");
+  var [studentEmail, SetstudentEmail] = useState("");
+  var [firstName, SetfirstName] = useState("");
+  var [lastName, SetlastName] = useState("");
+  var [branch, Setbranch] = useState("");
+  var [passoutYear, SetpassoutYear] = useState("");
 
 
-  
+  var [teachers, SetTeachers] = useState([]);
+  var [selectedTeacher, SetSelectedTeacher] = useState(null);
+
+
+
   useEffect(() => {
-      
+
     //   console.log(`Token ${token}`);
-      axios.get(`https://dbit-lor.herokuapp.com/api/listallteachers/`, {
-        headers: {
-          'Authorization': `Token ${props.token}`
-        }
-      })
+    axios.get(`https://dbit-lor.herokuapp.com/api/listallteachers/`, {
+      headers: {
+        'Authorization': `Token ${props.token}`
+      }
+    })
       .then((res) => {
         SetTeachers(res.data);
         // console.log(res.data);
@@ -57,31 +65,33 @@ const LORForm = (props) => {
       .catch((error) => {
         console.error(error)
       })
-    }, [props.token])
+  }, [props.token])
 
-    function SelectTeacher(e){
-      SetSelectedTeacher(e.target.value);
+  // function SelectTeacher(e) {
+  //   SetSelectedTeacher(e.target.value);
 
-    }
-    function SubmitFormForLor(){
-      if(selectedTeacher!=null){
-        SetSelectedTeacher(null);
+  // }
+  function SubmitFormForLor() {
+    console.log(studentID);
+    console.log(studentEmail);
+    if (selectedTeacher != null) {
+      SetSelectedTeacher(null);
       console.log("form submitted");
-      const article = { teacherID:parseInt(selectedTeacher) };
-      const headers = { 
-          'Authorization': `Token ${props.token}`,
+      const article = { teacherID: parseInt(selectedTeacher) };
+      const headers = {
+        'Authorization': `Token ${props.token}`,
 
-          // 'My-Custom-Header': 'foobar'
+        // 'My-Custom-Header': 'foobar'
       };
       axios.post('https://dbit-lor.herokuapp.com/api/applyforlor/', article, { headers })
-      .then(
-          (response)=>{
-              console.log(response.data);
-          }  
-          );
-      }
-
+        .then(
+          (response) => {
+            console.log(response.data);
+          }
+        );
     }
+
+  }
 
   return (
     <>
@@ -122,95 +132,7 @@ const LORForm = (props) => {
       {/* Page content */}
       <Container className="mt--7" fluid>
         <Row>
-          {/* <Col className="order-xl-2 mb-5 mb-xl-0" xl="10">
-            <Card className="card-profile shadow">
-              <Row className="justify-content-center">
-                <Col className="order-lg-2" lg="3">
-                  <div className="card-profile-image">
-                    <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                      <img
-                        alt="..."
-                        className="rounded-circle"
-                        src={
-                          require("../../assets/img/theme/team-4-800x800.jpg")
-                            .default
-                        }
-                      />
-                    </a>
-                  </div>
-                </Col>
-              </Row>
-              <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                <div className="d-flex justify-content-between">
-                  <Button
-                    className="mr-4"
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Connect
-                  </Button>
-                  <Button
-                    className="float-right"
-                    color="default"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
-                    Message
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardBody className="pt-0 pt-md-4">
-                <Row>
-                  <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                      <div>
-                        <span className="heading">22</span>
-                        <span className="description">Friends</span>
-                      </div>
-                      <div>
-                        <span className="heading">10</span>
-                        <span className="description">Photos</span>
-                      </div>
-                      <div>
-                        <span className="heading">89</span>
-                        <span className="description">Comments</span>
-                      </div>
-                    </div>
-                  </div>
-                </Row>
-                <div className="text-center">
-                  <h3>
-                    Jessica Jones
-                    <span className="font-weight-light">, 27</span>
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2" />
-                    Bucharest, Romania
-                  </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    Solution Manager - Creative Tim Officer
-                  </div>
-                  <div>
-                    <i className="ni education_hat mr-2" />
-                    University of Computer Science
-                  </div>
-                  <hr className="my-4" />
-                  <p>
-                    Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                    Nick Murphy — writes, performs and records all of his own
-                    music.
-                  </p>
-                  <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                    Show more
-                  </a>
-                </div>
-              </CardBody>
-            </Card>
-          </Col> */}
+
           <Col className="order-xl-1" xl="11">
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
@@ -250,7 +172,12 @@ const LORForm = (props) => {
                             // defaultValue="2018190010"
                             id="input-student-id"
                             placeholder="Student ID"
-                            type="text"
+                            type="number"
+                            minLength={10}
+                            maxLength={10}
+                            onChange={(e) => SetstudentID(e.target.value)}
+                            value={studentID}
+                            required
                           />
                         </FormGroup>
                       </Col>
@@ -267,6 +194,8 @@ const LORForm = (props) => {
                             id="input-email"
                             placeholder="jesse@example.com"
                             type="email"
+                            onChange={(e) => SetstudentEmail(e.target.value)}
+                            value={studentEmail}
                           />
                         </FormGroup>
                       </Col>
@@ -286,6 +215,8 @@ const LORForm = (props) => {
                             id="input-first-name"
                             placeholder="First name"
                             type="text"
+                            onChange={(e) => SetfirstName(e.target.value)}
+                            value={firstName}
                           />
                         </FormGroup>
                       </Col>
@@ -303,6 +234,8 @@ const LORForm = (props) => {
                             id="input-last-name"
                             placeholder="Last name"
                             type="text"
+                            onChange={(e) => SetlastName(e.target.value)}
+                            value={lastName}
                           />
                         </FormGroup>
                       </Col>
@@ -314,7 +247,7 @@ const LORForm = (props) => {
                             className="form-control-label"
                             htmlFor="input-last-name"
                           >Branch</label>
-                          <Input className="form-control-alternative" type="select" name="select" id="input-branch">
+                          <Input className="form-control-alternative" type="select" name="select" id="input-branch" onChange={(e) => Setbranch(e.target.value)} value={branch} >
                             <option>Computer</option>
                             <option>IT</option>
                             <option>EXTC</option>
@@ -336,6 +269,8 @@ const LORForm = (props) => {
                             id="input-passout-year"
                             placeholder="2020"
                             type="text"
+                            onChange={(e) => SetpassoutYear(e.target.value)}
+                            value={passoutYear}
                           />
                         </FormGroup>
                       </Col>
@@ -368,9 +303,10 @@ const LORForm = (props) => {
                             className="form-control-label"
                             htmlFor="input-faculty-name"
                           >Faculty Name</label>
-                          <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name" value={selectedTeacher} onChange={SelectTeacher}>
-                            {teachers.map((obj,idx)=><option value={obj.id}>{obj.first_name} {obj.last_name}</option>)}
-                            
+                          <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name" value={selectedTeacher} 
+                          onChange={(e) => SetSelectedTeacher(e.target.value)}>
+                            {teachers.map((obj, idx) => <option value={obj.id}>{obj.first_name} {obj.last_name}</option>)}
+
                             {/* <option>IT</option>
                             <option>EXTC</option>
                             <option>Mechanical</option> */}
@@ -398,11 +334,11 @@ const LORForm = (props) => {
                   </div>
                   <Row>
 
-                  <FormGroup check row>
-                    <Col sm={{ size: 10, offset: 2 }}>
-                      <Button onClick={SubmitFormForLor(2)}>Submit</Button>
-                    </Col>
-                  </FormGroup>
+                    <FormGroup check row>
+                      <Col sm={{ size: 10, offset: 2 }}>
+                        <Button onClick={SubmitFormForLor}>Submit</Button>
+                      </Col>
+                    </FormGroup>
                   </Row>
                 </Form>
               </CardBody>
