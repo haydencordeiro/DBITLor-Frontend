@@ -78,6 +78,7 @@ const Admin = (props) => {
       />
       <div className="main-content" ref={mainContent}>
         <AdminNavbar
+        SetToken={props.SetToken}
           {...props}
           brandText={getBrandText(props.location.pathname)}
         />

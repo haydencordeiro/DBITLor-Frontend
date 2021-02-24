@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 
 // reactstrap components
 import {
@@ -44,6 +44,17 @@ const Login = (props) => {
   function passInp(e){
     Setpassword(e.target.value);
   }
+
+useEffect(() => {
+  if(localStorage.getItem('token') || null!=null)
+  {
+    props.SetToken(localStorage.getItem('token'));
+    props.history.push('/admin')
+  }
+
+
+}, [])
+
   function LoginUser(){
     // props.GetUserToken(username,password);
     const article = { username:username,password:password };
@@ -55,7 +66,8 @@ const Login = (props) => {
     .then(
         (response)=>{
             props.SetToken(response.data.auth_token);
-            console.log("asdfa");
+            // console.log("asdfa");
+            localStorage.setItem('token', response.data.auth_token);
             props.history.push('/admin')
             
         }  

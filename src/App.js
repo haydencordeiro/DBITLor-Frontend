@@ -47,7 +47,7 @@ export default function App() {
         <BrowserRouter>
     <Switch>
 
-      <Route path="/admin"   render={(props) => <AdminLayout {...props}  user={user} token={token} />} />
+      <Route path="/admin"   render={(props) => <AdminLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
       <Route path="/" render={(props) => <AuthLayout {...props } SetToken={SetToken} />} />
       <Route path="/admin/lor-request" render={(props) => <LORForm {...props} />} />
 
