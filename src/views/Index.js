@@ -101,12 +101,12 @@ const Index = (props) => {
   }
 
   function LastLorStatus() {
-    console.log(application);
+    // console.log(application);
     if (application.length == 0) {
       return 0;
     }
     else {
-      console.log(application[0].status);
+      // console.log(application[0].status);
 
       switch (application[0].status) {
 
@@ -179,7 +179,7 @@ const Index = (props) => {
 
                       <tr>
                         <td>{obj.teacher.first_name} {obj.teacher.last_name}</td>
-                        <td>{obj.teacher.first_name}</td>
+                        <td>{obj.date} {obj.time}</td>
                         {/* <td style={{ color: 'green' }}>Approved</td> */}
                         {historyStatusColor(obj.status)}
                       </tr>

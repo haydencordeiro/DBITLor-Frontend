@@ -43,6 +43,7 @@ const LORForm = (props) => {
   var [lastName, SetlastName] = useState("");
   var [branch, Setbranch] = useState("");
   var [passoutYear, SetpassoutYear] = useState("");
+  var [content, Setcontent] = useState("");
 
 
   var [teachers, SetTeachers] = useState([]);
@@ -67,7 +68,7 @@ const LORForm = (props) => {
     })
       .then((res) => {
         // SetTeachers(res.data);
-        console.log(res.data);
+        // console.log(res.data);
         SetfirstName(res.data.first_name)
         SetlastName(res.data.last_name)
         SetstudentEmail(res.data.email)
@@ -119,17 +120,20 @@ const LORForm = (props) => {
 
 
 useEffect(() => {
-  console.log(selectedDept);
+  // console.log(selectedDept);
 }, [selectedDept])
 
 
   function SubmitFormForLor() {
-    console.log(studentID);
-    console.log(studentEmail);
-    if (selectedTeacher != null) {
-      SetSelectedTeacher(null);
-      console.log("form submitted");
-      const article = { teacherID: parseInt(selectedTeacher) };
+    
+    if (selectedTeacher==null){
+      alert("Please select teacher");
+      return;
+    }
+    console.log("form submitted");
+      const article = { teacherID: parseInt(selectedTeacher) ,
+        content:content
+      };
       const headers = {
         'Authorization': `Token ${props.token}`,
 
@@ -139,9 +143,10 @@ useEffect(() => {
         .then(
           (response) => {
             console.log(response.data);
+            props.history.push('/admin');
           }
         );
-    }
+ 
 
   }
 
@@ -366,6 +371,7 @@ useEffect(() => {
                           onChange={(e) => SetSelectedTeacher(e.target.value)}
                          
                           >
+                            <option value={null}></option>
                             {teachers.filter((item) => item.dept == selectedDept).map((obj, idx) => <option value={obj.id}>{obj.first_name} {obj.last_name}</option>)}
 
                             {/* <option>IT</option>
@@ -390,6 +396,8 @@ useEffect(() => {
                         // defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
                         // Open Source."
                         type="textarea"
+                        onChange={(e) => Setcontent(e.target.value)}
+                        value={content}
                       />
                     </FormGroup>
                   </div>

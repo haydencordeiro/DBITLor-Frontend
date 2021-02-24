@@ -83,7 +83,7 @@ const Admin = (props) => {
         />
         <Switch>
         <Route path="/admin/lor-request" >
-        <LORForm token={props.token}/>
+        <LORForm token={props.token} {...props}/>
           </Route>
       <Route path="/admin">
       <Index token={props.token}></Index>
