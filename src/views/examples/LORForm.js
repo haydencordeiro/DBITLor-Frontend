@@ -46,14 +46,17 @@ const LORForm = (props) => {
 
 
   var [teachers, SetTeachers] = useState([]);
+  var [departments, SetDepartments] = useState([]);
   var [selectedTeacher, SetSelectedTeacher] = useState(null);
+  var [selectedDept, SetSelectedDept] = useState(null);
 
 
 
 
-  
 
 
+
+// get logeed in users info
   useEffect(() => {
 
     //   console.log(`Token ${token}`);
@@ -76,6 +79,27 @@ const LORForm = (props) => {
       })
   }, [props.token])
 
+
+  // get list of all dept
+  useEffect(() => {
+
+    //   console.log(`Token ${token}`);
+    axios.get(`https://dbit-lor.herokuapp.com/api/listofdepartments/`, {
+      headers: {
+        'Authorization': `Token ${props.token}`
+      }
+    })
+      .then((res) => {
+        SetDepartments(res.data);
+        SetSelectedDept(res.data[0].name)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+  }, [props.token])
+
+
+  //get list of teachers 
   useEffect(() => {
 
     //   console.log(`Token ${token}`);
@@ -93,10 +117,12 @@ const LORForm = (props) => {
       })
   }, [props.token])
 
-  // function SelectTeacher(e) {
-  //   SetSelectedTeacher(e.target.value);
 
-  // }
+useEffect(() => {
+  console.log(selectedDept);
+}, [selectedDept])
+
+
   function SubmitFormForLor() {
     console.log(studentID);
     console.log(studentEmail);
@@ -118,6 +144,9 @@ const LORForm = (props) => {
     }
 
   }
+
+
+
 
   return (
     <>
@@ -278,10 +307,11 @@ const LORForm = (props) => {
                             htmlFor="input-last-name"
                           >Branch</label>
                           <Input className="form-control-alternative" type="select" name="select" id="input-branch" disabled onChange={(e) => Setbranch(e.target.value)} value={branch} >
-                            <option>Computer</option>
-                            <option>IT</option>
+                            {departments.map((obj,i)=><option val={obj.id}>{obj.name}</option>)}
+                            
+                            {/* <option>IT</option>
                             <option>EXTC</option>
-                            <option>Mechanical</option>
+                            <option>Mechanical</option> */}
                           </Input>
                         </FormGroup>
                       </Col>
@@ -320,11 +350,8 @@ const LORForm = (props) => {
                             className="form-control-label"
                             htmlFor="input-faculty-dept"
                           >Department</label>
-                          <Input className="form-control-alternative" type="select" name="select" id="input-faculty-dept">
-                            <option>Computer</option>
-                            <option>IT</option>
-                            <option>EXTC</option>
-                            <option>Mechanical</option>
+                          <Input className="form-control-alternative" onChange={(e)=>SetSelectedDept(e.target.value)}       type="select" name="select" id="input-faculty-dept">
+                          {departments.map((obj,i)=><option val={obj.id}>{obj.name}</option>)}
                           </Input>
                         </FormGroup>
                       </Col>
@@ -334,9 +361,12 @@ const LORForm = (props) => {
                             className="form-control-label"
                             htmlFor="input-faculty-name"
                           >Faculty Name</label>
+                          
                           <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name" value={selectedTeacher} 
-                          onChange={(e) => SetSelectedTeacher(e.target.value)}>
-                            {teachers.map((obj, idx) => <option value={obj.id}>{obj.first_name} {obj.last_name}</option>)}
+                          onChange={(e) => SetSelectedTeacher(e.target.value)}
+                         
+                          >
+                            {teachers.filter((item) => item.dept == selectedDept).map((obj, idx) => <option value={obj.id}>{obj.first_name} {obj.last_name}</option>)}
 
                             {/* <option>IT</option>
                             <option>EXTC</option>
