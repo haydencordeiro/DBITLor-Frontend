@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React,{useState,useEffect} from "react";
 
 // reactstrap components
 import {
@@ -32,8 +32,57 @@ import {
 } from "reactstrap";
 // core components
 import UserHeader from "components/Headers/UserHeader.js";
+import axios from 'axios'
 
-const LORForm = () => {
+
+const LORForm = (props) => {
+
+  var [teachers,SetTeachers]=useState([]);
+  var [selectedTeacher,SetSelectedTeacher]=useState(null);
+
+
+  
+  useEffect(() => {
+      
+    //   console.log(`Token ${token}`);
+      axios.get(`https://dbit-lor.herokuapp.com/api/listallteachers/`, {
+        headers: {
+          'Authorization': `Token ${props.token}`
+        }
+      })
+      .then((res) => {
+        SetTeachers(res.data);
+        // console.log(res.data);
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+    }, [props.token])
+
+    function SelectTeacher(e){
+      SetSelectedTeacher(e.target.value);
+
+    }
+    function SubmitFormForLor(){
+      if(selectedTeacher!=null){
+        SetSelectedTeacher(null);
+      console.log("form submitted");
+      const article = { teacherID:parseInt(selectedTeacher) };
+      const headers = { 
+          'Authorization': `Token ${props.token}`,
+
+          // 'My-Custom-Header': 'foobar'
+      };
+      axios.post('https://dbit-lor.herokuapp.com/api/applyforlor/', article, { headers })
+      .then(
+          (response)=>{
+              console.log(response.data);
+          }  
+          );
+      }
+
+    }
+
   return (
     <>
       {/* <UserHeader /> */}
@@ -319,11 +368,12 @@ const LORForm = () => {
                             className="form-control-label"
                             htmlFor="input-faculty-name"
                           >Faculty Name</label>
-                          <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name">
-                            <option>Computer</option>
-                            <option>IT</option>
+                          <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name" value={selectedTeacher} onChange={SelectTeacher}>
+                            {teachers.map((obj,idx)=><option value={obj.id}>{obj.first_name} {obj.last_name}</option>)}
+                            
+                            {/* <option>IT</option>
                             <option>EXTC</option>
-                            <option>Mechanical</option>
+                            <option>Mechanical</option> */}
                           </Input>
                         </FormGroup>
                       </Col>
@@ -350,7 +400,7 @@ const LORForm = () => {
 
                   <FormGroup check row>
                     <Col sm={{ size: 10, offset: 2 }}>
-                      <Button>Submit</Button>
+                      <Button onClick={SubmitFormForLor(2)}>Submit</Button>
                     </Col>
                   </FormGroup>
                   </Row>

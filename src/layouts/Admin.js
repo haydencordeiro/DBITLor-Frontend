@@ -82,8 +82,8 @@ const Admin = (props) => {
           brandText={getBrandText(props.location.pathname)}
         />
         <Switch>
-        <Route path="/admin/lor-request">
-        <LORForm/>
+        <Route path="/admin/lor-request" >
+        <LORForm token={props.token}/>
           </Route>
       <Route path="/admin">
       <Index token={props.token}></Index>
