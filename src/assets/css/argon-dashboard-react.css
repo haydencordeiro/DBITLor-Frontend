@@ -16145,3 +16145,7 @@ button:focus, :focus {
   margin-right: 10px; }
 
 /*# sourceMappingURL=argon-dashboard-react.css.map */
+
+.rs-steps-item-status-process .rs-steps-item-content {
+  color: #fff;
+}

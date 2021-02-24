@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 // node.js library that concatenates classes (strings)
 import classnames from "classnames";
 // javascipt plugin for creating charts
@@ -25,6 +25,10 @@ import { Line, Bar } from "react-chartjs-2";
 // reactstrap components
 
 import axios from 'axios';
+
+import { Steps } from 'rsuite';
+import 'rsuite/dist/styles/rsuite-default.css'
+import 'assets/css/styles.css';
 
 import {
   Button,
@@ -42,6 +46,8 @@ import {
   Col,
 } from "reactstrap";
 
+
+
 // core components
 import {
   chartOptions,
@@ -51,6 +57,7 @@ import {
 } from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
+// import { TRUE } from "node-sass";
 
 const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
@@ -81,13 +88,22 @@ const Index = (props) => {
     setActiveNav(index);
     setChartExample1Data("data" + index);
   };
+
+  const timelineStyles = {
+    // width: '200px',
+    height: '100%',
+    display: 'inline-table',
+    verticalAlign: 'top',
+    color: 'white'
+  };
+
   return (
     <>
       <Header />
 
       {/* Page content */}
       <Container className="mt--7" fluid>
-       
+
         <Row>
           <Col className="mb-5 mb-xl-0" xl="8">
             <Card className="bg-gradient-default shadow">
@@ -103,11 +119,14 @@ const Index = (props) => {
               </CardHeader>
               <CardBody>
                 <div className="chart">
-                  {/* <Line
-                    data={chartExample1[chartExample1Data]}
-                    options={chartExample1.options}
-                    getDatasetAtEvent={(e) => console.log(e)}
-                  /> */}
+                  <div className="verticalTimeline">
+                    <Steps current={1} vertical style={timelineStyles}>
+                      <Steps.Item title="Finished" />
+                      <Steps.Item title="In progress" />
+                      <Steps.Item title="Waiting" />
+                      <Steps.Item title="Waiting" />
+                    </Steps>
+                  </div>
                 </div>
               </CardBody>
             </Card>
@@ -126,17 +145,45 @@ const Index = (props) => {
               </CardHeader>
               <CardBody>
                 {/* Chart */}
-                <div className="chart">
-                  {/* <Bar
-                    data={chartExample2.data}
-                    options={chartExample2.options}
-                  /> */}
+                <div className="chart lorHistoryTable">
+                  <table className="table" borderless={1}>
+                    <tr>
+                      <th>Teacher Name</th>
+                      <th>Subject</th>
+                      <th>Status</th>
+                    </tr>
+                    <tr>
+                      <td>Ms. Ditty Varghese</td>
+                      <td>Algorithms</td>
+                      <td style={{ color: 'green' }}>Approved</td>
+                    </tr>
+                    <tr>
+                      <td>Mr. Imran Mirza</td>
+                      <td>Software Engineering</td>
+                      <td style={{ color: 'orange' }}>Pending</td>
+                    </tr>
+                    <tr>
+                      <td>Ms. Sejal Chopra</td>
+                      <td>COA</td>
+                      <td style={{ color: 'blue' }}>Drafting</td>
+                    </tr>
+                    <tr>
+                      <td>Ms. Priya Kaul</td>
+                      <td>ERP</td>
+                      <td style={{ color: 'red' }}>Rejected</td>
+                    </tr>
+                    <tr>
+                      <td>Ms. Sana Shaikh</td>
+                      <td>Python</td>
+                      <td style={{ color: 'green' }}>Approved</td>
+                    </tr>
+                  </table>
                 </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
-        
+
       </Container>
     </>
   );
