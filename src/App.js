@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
 // import 'rsuite/dist/styles/rsuite-default.css';
 import { Button } from 'rsuite';
+import LORForm from './views/examples/LORForm'
 
 export default function App() {
 
@@ -61,7 +62,13 @@ export default function App() {
     <Switch>
       <Route path="/admin"   render={(props) => <AdminLayout {...props}  user={user} token={token} />} />
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Redirect from="/" to="/admin/index" user={user}  />
+      <Route path="/admin/lor-request" render={(props) => <LORForm {...props} />} />
+
+
+
+        {/* <Route path="/admin/index" render={(props) => <Index {...props} token={token} />} /> */}
+
+      {/* <Redirect from="/" to="/admin/index" user={user}  /> */}
     </Switch>
   </BrowserRouter>
     )

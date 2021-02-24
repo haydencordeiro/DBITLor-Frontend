@@ -50,13 +50,14 @@ const Index = (props) => {
   const [activeNav, setActiveNav] = useState(1);
   const [chartExample1Data, setChartExample1Data] = useState("data1");
   var [application, SetApplication] = useState([]);
-
+ 
   useEffect(() => {
     var access_token = "53716934355c0e13967ec968a14440c073dcb51f"
     // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
+    
     axios.get(`https://dbit-lor.herokuapp.com/api/loggedinusersapplications/`, {
       headers: {
-        'Authorization': `Token 53716934355c0e13967ec968a14440c073dcb51f`
+        'Authorization': `Token ${props.token}`
       }
     })
       .then((res) => {
@@ -67,7 +68,7 @@ const Index = (props) => {
       .catch((error) => {
         console.error(error)
       })
-  }, [])
+  }, [props.token])
 
   if (window.Chart) {
     parseOptions(Chart, chartOptions());

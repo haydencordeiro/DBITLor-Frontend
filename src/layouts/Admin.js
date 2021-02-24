@@ -23,7 +23,8 @@ import { Container } from "reactstrap";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-
+import Index from'../views/Index'
+import LORForm from '../views/examples/LORForm'
 import routes from "routes.js";
 
 const Admin = (props) => {
@@ -81,9 +82,15 @@ const Admin = (props) => {
           brandText={getBrandText(props.location.pathname)}
         />
         <Switch>
-          {getRoutes(routes)}
-          <Redirect from="*" to="/admin/index" />
+        <Route path="/admin/lor-request">
+        <LORForm/>
+          </Route>
+      <Route path="/admin">
+      <Index token={props.token}></Index>
+    </Route>
         </Switch>
+        
+        
         <Container fluid>
           <AdminFooter />
         </Container>
