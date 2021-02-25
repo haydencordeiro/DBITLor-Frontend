@@ -24,6 +24,18 @@ export default function App() {
           SetToken("");
       }
 
+
+// check if already logged in
+      useEffect(() => {
+        if(localStorage.getItem('token') || null!=null)
+        {
+          SetToken(localStorage.getItem('token'));
+
+        }
+      
+      
+      }, [])
+
   useEffect(() => {
       
     //   console.log(`Token ${token}`);

@@ -62,13 +62,26 @@ useEffect(() => {
         // 'Authorization': 'Bearer my-token',
         // 'My-Custom-Header': 'foobar'
     };
-    axios.post('https://dbit-lor.herokuapp.com/token/login/', article, { headers })
+    axios.post('https://dbit-lor.herokuapp.com/token/loginwithuser/', article, { headers })
     .then(
         (response)=>{
             props.SetToken(response.data.auth_token);
             // console.log("asdfa");
-            localStorage.setItem('token', response.data.auth_token);
-            props.history.push('/admin')
+            localStorage.setItem('token', response.data.token);
+            // console.log(response.data.token);
+            props.SetUser({
+                first_name:response.data.user.first_name,
+                last_name:response.data.user.last_name,
+            });
+            
+            if(response.data.whoami==="student"){
+              props.history.push('/admin')
+
+            }
+            else{
+              props.history.push('/teacher')
+
+            }
             
         }  
         )
