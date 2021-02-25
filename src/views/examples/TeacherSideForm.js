@@ -54,7 +54,61 @@ const TeacherSideForm = (props) => {
 
 
 
+  function ApproveForm(){
+    var article = { appID: props.selectedLor.id,status:"approved",content:content };
+    if (article['content']===null)
+    {
+      article['content']="";
+    }
 
+    const headers = {
+      'Authorization': `Token ${props.token}`,
+
+
+    };
+    axios.post('https://dbit-lor.herokuapp.com/api/loggedinteachereditapplications/', article, { headers })
+      .then(
+        (response) => {
+
+     
+
+        }
+      )
+      .catch((error) => {
+        console.error(error, "failed to approve");
+      });
+
+  }
+
+
+
+
+
+  function RejectForm(){
+    var article = { appID: props.selectedLor.id,status:"rejected",content:content };
+    if (article['content']===null)
+    {
+      article['content']="";
+    }
+    console.log(article,"df");
+    const headers = {
+      'Authorization': `Token ${props.token}`,
+
+
+    };
+    axios.post('https://dbit-lor.herokuapp.com/api/loggedinteachereditapplications/', article, { headers })
+      .then(
+        (response) => {
+
+          // console.log(response.data,"Asf");
+
+        }
+      )
+      .catch((error) => {
+        // console.error(error, "failed to approve");
+      });
+
+  }
 
 
 // get logeed in users info
@@ -200,7 +254,7 @@ useEffect(() => {
                     <Button
                       color="success"
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={ApproveForm}
                       // block
                       size="lg"
                     >
@@ -209,7 +263,7 @@ useEffect(() => {
                     <Button
                       color="danger"
                       href="#pablo"
-                      onClick={(e) => e.preventDefault()}
+                      onClick={RejectForm}
                       // block
                       size="lg"
                     >
