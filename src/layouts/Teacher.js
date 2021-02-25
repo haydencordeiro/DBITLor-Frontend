@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { useLocation, Route, Switch, Redirect } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
@@ -29,6 +29,7 @@ import routes from "routes.js";
 import TeacherSideForm from "views/examples/TeacherSideForm.js";
 
 const Teacher = (props) => {
+  var [selectedLor,SetselectedLor]=useState("");
   const mainContent = React.useRef(null);
   const location = useLocation();
 
@@ -85,10 +86,10 @@ const Teacher = (props) => {
         />
         <Switch>
         <Route path="/teacher/lor-form" >
-        <TeacherSideForm token={props.token} {...props}/>
+        <TeacherSideForm token={props.token} {...props} selectedLor={selectedLor}/>
           </Route>
       <Route path="/teacher">
-      <TeacherDashboard token={props.token}></TeacherDashboard>
+      <TeacherDashboard token={props.token} {...props} SetselectedLor={SetselectedLor}></TeacherDashboard>
     </Route>
         </Switch>
         

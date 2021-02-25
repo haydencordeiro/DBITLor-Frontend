@@ -20,18 +20,21 @@ export default function App() {
 
 
 // check if already logged in
-      // useEffect(() => {
-      //   if(token!="" && localStorage.getItem('token') || null!=null)
-      //   {
-      //     SetToken(localStorage.getItem('token'));
-      //     console.log("asdfas");
-      //   }
-      //   else{
-      //     <Redirect to="/"  /> 
-      //   }
+      useEffect(() => {
+        if(token!=""){
+          return
+        }
+        if(localStorage.getItem('token') || null!=null)
+        {
+          SetToken(localStorage.getItem('token'));
+          console.log("asdfas");
+        }
+        else{
+          <Redirect to="/"  /> 
+        }
       
       
-      // }, [])
+      }, [])
 
   useEffect(() => {
       

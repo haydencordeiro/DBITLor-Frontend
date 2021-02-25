@@ -15,13 +15,38 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React ,{useState,useEffect} from "react";
 import {Link } from "react-router-dom";
 
+import axios from 'axios';
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col, Button } from "reactstrap";
 
-const TeacherHeader = () => {
+const TeacherHeader = (props) => {
+  var [teacherStats, SetteacherStats] = useState(
+    {
+      "pendingReq": 0,
+      "approvedReq": 0,
+      "rejectedReq": 0
+  }
+  );
+  
+  useEffect(() => {
+    console.log(props.token,"asf");
+    axios.get(`https://dbit-lor.herokuapp.com/api/dashboardstatsteacher/`, {
+      headers: {
+        'Authorization': `Token ${props.token}`
+      }
+    })
+      .then((res) => {
+        SetteacherStats(res.data);
+        console.log(res.data,"here");
+
+      })
+      .catch((error) => {
+        console.error(error,"asdf")
+      })
+  }, [props.token])
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -39,7 +64,7 @@ const TeacherHeader = () => {
                     </Row>
                     <Row className="align-items-center justify-content-center">
                       <Link to="/teacher/lor-form">
-                        <Button color="default mt-3" type="button">25</Button>
+                        <Button color="default mt-3" type="button">{teacherStats.pendingReq}</Button>
                       </Link>
                     </Row>
 
@@ -55,7 +80,7 @@ const TeacherHeader = () => {
                       </div>
                     </Row>
                     <Row className="align-items-center justify-content-center">
-                      <Button color="default mt-3" type="button">30</Button>
+                      <Button color="default mt-3" type="button">{teacherStats.approvedReq}</Button>
 
                     </Row>
 
@@ -71,7 +96,7 @@ const TeacherHeader = () => {
                       </div>
                     </Row>
                     <Row className="align-items-center justify-content-center">
-                      <Button color="default mt-3" type="button">5</Button>
+                      <Button color="default mt-3" type="button">{teacherStats.rejectedReq}</Button>
 
                     </Row>
 

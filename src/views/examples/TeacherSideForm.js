@@ -44,7 +44,7 @@ const TeacherSideForm = (props) => {
   var [branch, Setbranch] = useState("");
   var [passoutYear, SetpassoutYear] = useState("");
   var [content, Setcontent] = useState("");
-
+ 
 
   var [teachers, SetTeachers] = useState([]);
   var [departments, SetDepartments] = useState([]);
@@ -59,26 +59,22 @@ const TeacherSideForm = (props) => {
 
 // get logeed in users info
   useEffect(() => {
-
-    //   console.log(`Token ${token}`);
-    axios.get(`https://dbit-lor.herokuapp.com/api/loggedinuserdetails/`, {
-      headers: {
-        'Authorization': `Token ${props.token}`
+      console.log(props.selectedLor)
+      try{
+        SetfirstName(props.selectedLor.student.first_name)
+        SetlastName(props.selectedLor.student.last_name)
+        SetstudentEmail(props.selectedLor.student.email)
+        SetpassoutYear(props.selectedLor.student.yearofpassout)
+        SetstudentID(props.selectedLor.student.studentID)
+        Setbranch(props.selectedLor.student.dept)
+        Setcontent(props.selectedLor.content)
       }
-    })
-      .then((res) => {
-        // SetTeachers(res.data);
-        // console.log(res.data);
-        SetfirstName(res.data.first_name)
-        SetlastName(res.data.last_name)
-        SetstudentEmail(res.data.email)
-        SetpassoutYear(res.data.yearofpassout)
-        SetstudentID(res.data.studentID)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }, [props.token])
+      catch{
+        
+      }
+     
+
+  }, [props.selectedLor])
 
 
   // get list of all dept
@@ -305,19 +301,24 @@ useEffect(() => {
                       </Col>
                     </Row>
                     <Row>
-                      <Col lg="6">
+                    <Col lg="6">
                         <FormGroup>
                           <label
                             className="form-control-label"
-                            htmlFor="input-last-name"
-                          >Branch</label>
-                          <Input className="form-control-alternative" type="select" name="select" id="input-branch" disabled onChange={(e) => Setbranch(e.target.value)} value={branch} >
-                            {departments.map((obj,i)=><option val={obj.id}>{obj.name}</option>)}
-                            
-                            {/* <option>IT</option>
-                            <option>EXTC</option>
-                            <option>Mechanical</option> */}
-                          </Input>
+                            htmlFor="input-passout-year"
+                          >
+                            Branch
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            // defaultValue="2020"
+                            id="input-passout-year"
+                            placeholder="2020"
+                            type="text"
+                         
+                            value={branch}
+                            disabled
+                          />
                         </FormGroup>
                       </Col>
                       <Col lg="6">
@@ -343,48 +344,7 @@ useEffect(() => {
                     </Row>
                   </div>
                   <hr className="my-4" />
-                  {/* Address */}
-                  <h6 className="heading-small text-muted mb-4">
-                    Faculty information
-                  </h6>
-                  <div className="pl-lg-4">
-                    <Row>
-                      <Col md="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-faculty-dept"
-                          >Department</label>
-                          <Input className="form-control-alternative" onChange={(e)=>SetSelectedDept(e.target.value)}       type="select" name="select" id="input-faculty-dept">
-                          {departments.map((obj,i)=><option val={obj.id}>{obj.name}</option>)}
-                          </Input>
-                        </FormGroup>
-                      </Col>
-                      <Col md="6">
-                        <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-faculty-name"
-                          >Faculty Name</label>
-                          
-                          <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name" value={selectedTeacher} 
-                          onChange={(e) => SetSelectedTeacher(e.target.value)}
-                         
-                          >
-                            <option value={null}></option>
-                            {teachers.filter((item) => item.dept == selectedDept).map((obj, idx) => <option value={obj.id}>{obj.first_name} {obj.last_name}</option>)}
 
-                            {/* <option>IT</option>
-                            <option>EXTC</option>
-                            <option>Mechanical</option> */}
-                          </Input>
-                        </FormGroup>
-                      </Col>
-                    </Row>
-
-                  </div>
-                  <hr className="my-4" />
-                  {/* Description */}
                   <h6 className="heading-small text-muted mb-4">LOR Draft</h6>
                   <div className="pl-lg-4">
                     <FormGroup>
