@@ -196,16 +196,26 @@ useEffect(() => {
                   <Col xs="8">
                     <h3 className="mb-0">LOR for Approval</h3>
                   </Col>
-                  {/* <Col className="text-right" xs="4">
+                  <Col className="text-right" xs="4">
                     <Button
-                      color="primary"
+                      color="success"
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
-                      size="sm"
+                      // block
+                      size="lg"
                     >
-                      Settings
+                      Approve
                     </Button>
-                  </Col> */}
+                    <Button
+                      color="danger"
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                      // block
+                      size="lg"
+                    >
+                      Reject
+                    </Button>
+                  </Col>
                 </Row>
               </CardHeader>
               <CardBody>
@@ -361,14 +371,14 @@ useEffect(() => {
                       />
                     </FormGroup>
                   </div>
-                  <Row>
+                  {/* <Row>
 
                     <FormGroup check row>
                       <Col sm={{ size: 10, offset: 2 }}>
                         <Button onClick={SubmitFormForLor}>Submit</Button>
                       </Col>
                     </FormGroup>
-                  </Row>
+                  </Row> */}
                 </Form>
               </CardBody>
             </Card>

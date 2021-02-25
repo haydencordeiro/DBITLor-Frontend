@@ -22,7 +22,7 @@ import { Container } from "reactstrap";
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
+import TeacherSidebar from "components/Sidebar/TeacherSidebar.js";
 import TeacherDashboard from '../views/TeacherDashboard.js';
 // import LORForm from '../views/examples/LORForm';
 import routes from "routes.js";
@@ -69,7 +69,7 @@ const Teacher = (props) => {
 
   return (
     <>
-      <Sidebar
+      <TeacherSidebar
         {...props}
         routes={routes}
         logo={{

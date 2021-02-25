@@ -1,35 +1,35 @@
 
 import React from "react";
-import {generatePath, Link } from "react-router-dom";
+import { generatePath, Link } from "react-router-dom";
 import axios from 'axios';
 // reactstrap components
-import { Card, CardBody, CardTitle, Container, Row, Col, Button } from "reactstrap";
+import { Card, CardBody, CardTitle, Container, Row, Col, Button, Input } from "reactstrap";
 
 const Header = (props) => {
-  function GeneratePdf(){
+  function GeneratePdf() {
     // props.GetUserToken(username,password);
     console.log(props.token);
-    const article = { appID:1 };
-    const headers = { 
-        'Authorization': `Token ${props.token}`,
-        
+    const article = { appID: 1 };
+    const headers = {
+      'Authorization': `Token ${props.token}`,
+
 
     };
     axios.post('https://dbit-lor.herokuapp.com/api/generatepdf/', article, { headers })
-    .then(
-        (response)=>{
+      .then(
+        (response) => {
 
-            console.log(response.data.downloadLink);
+          console.log(response.data.downloadLink);
 
-            
-        }  
-        )
-        .catch((error) => {
-          console.error(error,"failed to download");
-        });
 
-        
-    
+        }
+      )
+      .catch((error) => {
+        console.error(error, "failed to download");
+      });
+
+
+
   }
   console.log(props);
   return (
@@ -56,23 +56,39 @@ const Header = (props) => {
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="4" xl="4">
+              <Col lg="8" xl="8">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
                       <div className="col">
-                        <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Get your LOR Approved</CardTitle>
+                        <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Download your LOR</CardTitle>
                       </div>
                     </Row>
                     <Row className="align-items-center justify-content-center">
-                      <Button color="default mt-3" type="button">Approve LOR</Button>
+                      {/* <Button color="default mt-3" type="button">Approve LOR</Button> */}
+
+                    </Row>
+                    <Row className="align-items-center justify-content-center align-middle">
+                      <Col lg="8" xl="8" className="align-middle">
+                        <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name">
+                          <option>1</option>
+                          <option>2</option>
+                          <option>3</option>
+                          <option>4</option>
+                          <option>5</option>
+                        </Input>
+                      </Col>
+
+                      <Col lg="4" xl="4" className="align-middle">
+                        <Button color="default mt-3" type="button" onClick={GeneratePdf}>Download</Button>
+                      </Col>
 
                     </Row>
 
                   </CardBody>
                 </Card>
               </Col>
-              <Col lg="4" xl="4">
+              {/* <Col lg="4" xl="4">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
                     <Row>
@@ -87,7 +103,7 @@ const Header = (props) => {
 
                   </CardBody>
                 </Card>
-              </Col>
+              </Col> */}
               {/* <Col lg="6" xl="3">
                 <Card className="card-stats mb-4 mb-xl-0">
                   <CardBody>
