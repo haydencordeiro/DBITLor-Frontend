@@ -1,11 +1,13 @@
 import React,{ useEffect,useState } from "react";
 import AdminLayout from "layouts/Admin.js";
+import TeacherLayout from "layouts/Teacher.js";
 import AuthLayout from "layouts/Auth.js";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import axios from 'axios';
 // import 'rsuite/dist/styles/rsuite-default.css';
 import { Button } from 'rsuite';
 import LORForm from './views/examples/LORForm'
+import TeacherSideForm from './views/examples/TeacherSideForm.js'
 
 export default function App() {
 
@@ -48,8 +50,10 @@ export default function App() {
     <Switch>
 
       <Route path="/admin"   render={(props) => <AdminLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
+      <Route path="/teacher"   render={(props) => <TeacherLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
       <Route path="/" render={(props) => <AuthLayout {...props } SetToken={SetToken} />} />
       <Route path="/admin/lor-request" render={(props) => <LORForm {...props} />} />
+      <Route path="/teacher/lor-form" render={(props) => <TeacherSideForm {...props} />} />
 
 
 
