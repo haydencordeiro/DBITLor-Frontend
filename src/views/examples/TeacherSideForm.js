@@ -174,7 +174,7 @@ useEffect(() => {
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Request LOR</h1>
+              <h1 className="display-2 text-white">Request LOR Teacher</h1>
               <p className="text-white mt-0 mb-5">
                 Fill in the correct details to apply for approval of your LOR from the respected faculty.
               </p>

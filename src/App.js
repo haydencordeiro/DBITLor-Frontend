@@ -59,9 +59,9 @@ export default function App() {
     <Switch>
 
       {/* <Route exact path="/admin/lor-request" render={(props) => <LORForm {...props} />} /> */}
-      <Route exact path="/teacher/lor-form" render={(props) => <TeacherSideForm {...props} />} />
+      {/* <Route exact path="/teacher/lor-form" render={(props) => <TeacherSideForm {...props} />} /> */}
       <Route  path="/admin"   render={(props) => <AdminLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
-      <Route exact path="/teacher"   render={(props) => <TeacherLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
+      <Route  path="/teacher"   render={(props) => <TeacherLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
       <Route path="/" render={(props) => <AuthLayout {...props } SetToken={SetToken} />} />
 
 
