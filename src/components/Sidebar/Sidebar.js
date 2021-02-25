@@ -70,8 +70,11 @@ const Sidebar = (props) => {
   };
   // creates the links that appear in the left menu / Sidebar
   const createLinks = (routes) => {
+    
     return routes.map((prop, key) => {
+      
       return (
+        
         <NavItem key={key}>
           <NavLink
             to={prop.layout + prop.path}
@@ -208,6 +211,7 @@ const Sidebar = (props) => {
                   className="navbar-toggler"
                   type="button"
                   onClick={toggleCollapse}
+                  
                 >
                   <span />
                   <span />
@@ -232,13 +236,54 @@ const Sidebar = (props) => {
             </InputGroup>
           </Form>
           {/* Navigation */}
-          <Nav navbar>{createLinks(routes)}</Nav>
+          <Nav navbar>
+            
+            {/* {createLinks(routes)} */}
+            <NavItem >
+              <NavLink
+                to={'/admin'}
+
+                onClick={closeCollapse}
+                activeClassName="active"
+                tag={NavLinkRRD}
+              >
+                <i className={'ni ni-tv-2 text-primary'} />
+              Dashboard
+              </NavLink>
+          </NavItem>
+          <NavItem >
+              <NavLink
+                to={'/'}
+                tag={NavLinkRRD}
+                onClick={closeCollapse}
+                activeClassName="active"
+              >
+                <i className={'ni ni-key-25 text-info'} />
+              Login
+              </NavLink>
+          </NavItem>
+          
+          <NavItem >
+              <NavLink
+                to={'/admin/lor-request'}
+                tag={NavLinkRRD}
+                onClick={closeCollapse}
+                activeClassName="active"
+              >
+                <i className={'ni ni-bullet-list-67 text-red'} />
+              Request LOR
+              </NavLink>
+          </NavItem>
+          
+
+          
+          </Nav>
           {/* Divider */}
           <hr className="my-3" />
           {/* Heading */}
-          <h6 className="navbar-heading text-muted">Documentation</h6>
+          {/* <h6 className="navbar-heading text-muted">Documentation</h6> */}
           {/* Navigation */}
-          <Nav className="mb-md-3" navbar>
+          {/* <Nav className="mb-md-3" navbar>
             <NavItem>
               <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
                 <i className="ni ni-spaceship" />
@@ -265,7 +310,7 @@ const Sidebar = (props) => {
                 Upgrade to PRO
               </NavLink>
             </NavItem>
-          </Nav>
+          </Nav> */}
         </Collapse>
       </Container>
     </Navbar>
