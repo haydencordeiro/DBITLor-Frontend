@@ -1,15 +1,39 @@
 
-import React from "react";
+import React,{useState,useEffect} from "react";
 import { generatePath, Link } from "react-router-dom";
 import axios from 'axios';
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col, Button, Input } from "reactstrap";
 
 const Header = (props) => {
+  var [application, SetApplication] = useState([]);
+  var [selectedLorDown, SetselectedLorDown] = useState(-1);
+  useEffect(() => {
+
+    
+    axios.get(`https://dbit-lor.herokuapp.com/api/loggedinusersapplications/`, {
+      headers: {
+        'Authorization': `Token ${props.token}`
+      }
+    })
+      .then((res) => {
+        SetApplication(res.data);
+        // console.log(res.data);
+     
+      })
+      .catch((error) => {
+        console.log(props.token);
+
+        console.error(error)
+      })
+  }, [props.token])
   function GeneratePdf() {
-    // props.GetUserToken(username,password);
-    console.log(props.token);
-    const article = { appID: 1 };
+    if(selectedLorDown==-1){
+      alert("Please Select an option from the dropdown");
+      return 
+    }
+    // console.log(props.token);
+    const article = { appID: selectedLorDown };
     const headers = {
       'Authorization': `Token ${props.token}`,
 
@@ -21,7 +45,7 @@ const Header = (props) => {
 
           console.log(response.data.downloadLink);
 
-
+          window.open(response.data.downloadLink, '_blank')
         }
       )
       .catch((error) => {
@@ -70,12 +94,10 @@ const Header = (props) => {
                     </Row>
                     <Row className="align-items-center justify-content-center align-middle">
                       <Col lg="8" xl="8" className="align-middle">
-                        <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name">
-                          <option>1</option>
-                          <option>2</option>
-                          <option>3</option>
-                          <option>4</option>
-                          <option>5</option>
+                        <Input className="form-control-alternative" type="select" name="select" id="input-faculty-name" onChange={(e)=>SetselectedLorDown(e.target.value)}>
+                        <option value={null}></option>
+                            {application.filter((item) => item.status == "approved").map((obj, idx) => <option value={obj.id}>{obj.teacher.first_name} {obj.teacher.last_name}</option>)}
+
                         </Input>
                       </Col>
 

@@ -53,7 +53,7 @@ const Index = (props) => {
   var [application, SetApplication] = useState([]);
  
   useEffect(() => {
-    console.log("recived new token index.js");
+    // console.log("recived new token index.js");
     // console.log(props.token)
     // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
     
@@ -70,7 +70,7 @@ const Index = (props) => {
       .catch((error) => {
         console.log(props.token);
 
-        console.error(error,"ASdfasdf")
+        console.error(error)
       })
   }, [props.token])
 
