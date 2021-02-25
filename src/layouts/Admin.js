@@ -27,6 +27,9 @@ import Index from'../views/Index'
 import LORForm from '../views/examples/LORForm'
 import routes from "routes.js";
 
+
+
+
 const Admin = (props) => {
   const mainContent = React.useRef(null);
   const location = useLocation();

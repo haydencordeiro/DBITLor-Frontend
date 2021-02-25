@@ -1,27 +1,37 @@
-/*!
 
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-import {Link } from "react-router-dom";
-
+import {generatePath, Link } from "react-router-dom";
+import axios from 'axios';
 // reactstrap components
 import { Card, CardBody, CardTitle, Container, Row, Col, Button } from "reactstrap";
 
-const Header = () => {
+const Header = (props) => {
+  function GeneratePdf(){
+    // props.GetUserToken(username,password);
+    console.log(props.token);
+    const article = { appID:1 };
+    const headers = { 
+        'Authorization': `Token ${props.token}`,
+        
+
+    };
+    axios.post('https://dbit-lor.herokuapp.com/api/generatepdf/', article, { headers })
+    .then(
+        (response)=>{
+
+            console.log(response.data.downloadLink);
+
+            
+        }  
+        )
+        .catch((error) => {
+          console.error(error,"failed to download");
+        });
+
+        
+    
+  }
+  console.log(props);
   return (
     <>
       <div className="header bg-gradient-info pb-8 pt-5 pt-md-8">
@@ -67,11 +77,11 @@ const Header = () => {
                   <CardBody>
                     <Row>
                       <div className="col">
-                        <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Know the status of your LOR</CardTitle>
+                        <CardTitle tag="h5" className="text-uppercase text-muted text-center mb-0">Download Your LOR</CardTitle>
                       </div>
                     </Row>
                     <Row className="align-items-center justify-content-center">
-                      <Button color="default mt-3" type="button">LOR Status</Button>
+                      <Button color="default mt-3" type="button" onClick={GeneratePdf}>Download</Button>
 
                     </Row>
 

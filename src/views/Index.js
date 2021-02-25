@@ -54,7 +54,7 @@ const Index = (props) => {
  
   useEffect(() => {
     console.log("recived new token index.js");
-    console.log(props.token)
+    // console.log(props.token)
     // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
     
     axios.get(`https://dbit-lor.herokuapp.com/api/loggedinusersapplications/`, {
@@ -127,7 +127,7 @@ const Index = (props) => {
 
   return (
     <>
-      <Header />
+      <Header token={props.token}/>
 
       {/* Page content */}
       <Container className="mt--7" fluid>
