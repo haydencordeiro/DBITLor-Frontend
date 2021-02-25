@@ -58,6 +58,17 @@ function ViewLor(e){
   props.history.push('/teacher/lor-form')
 }
 
+function historyStatusColor(inp) {
+  switch (inp) {
+
+    case "pending": return <td style={{ color: 'orange' }}>Pending</td>;
+    case "approved": return <td style={{ color: 'green' }}>Approved</td>;
+    case "rejected": return <td style={{ color: 'red' }}>Rejected</td>;
+
+
+    default: return <td style={{ color: 'blue' }}>Processing</td>
+  }
+}
 
 
 
@@ -134,7 +145,8 @@ function ViewLor(e){
                       {application.map((obj,i)=> 
                                             <tr key={obj.id}>
                                               <td>{obj.student.first_name} {obj.student.lastt_name}</td>
-                                              <td>Algorithms</td>
+                                              {/* <td>Algorithms</td> */}
+                                              {historyStatusColor(obj.status)}
                                               <td><Button className="default" value={i} onClick={ViewLor}>View</Button></td>
                                             </tr>
                                             
