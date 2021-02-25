@@ -96,7 +96,7 @@ const Auth = (props) => {
         <Container className="mt--8 pb-5">
           <Row className="justify-content-center">
            
-            <Login SetToken={props.SetToken} SetUser={props.SetUser} {...props}/>
+            <Login SetToken={props.SetToken}  {...props}/>
             {/* <Switch>
               {getRoutes(routes)}
               <Redirect from="*" to="/auth/login" />

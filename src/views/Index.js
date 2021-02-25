@@ -44,6 +44,7 @@ import {
 } from "variables/charts.js";
 
 import Header from "components/Headers/Header.js";
+import { couldStartTrivia } from "typescript";
 // import { TRUE } from "node-sass";
 
 const Index = (props) => {
@@ -52,7 +53,8 @@ const Index = (props) => {
   var [application, SetApplication] = useState([]);
  
   useEffect(() => {
- 
+    console.log("recived new token index.js");
+    console.log(props.token)
     // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
     
     axios.get(`https://dbit-lor.herokuapp.com/api/loggedinusersapplications/`, {

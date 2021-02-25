@@ -19,26 +19,23 @@ export default function App() {
     var [token,SetToken]=useState("");
 
 
-
-      function LogOut(){
-          SetToken("");
-      }
-
-
 // check if already logged in
-      useEffect(() => {
-        if(localStorage.getItem('token') || null!=null)
-        {
-          SetToken(localStorage.getItem('token'));
-
-        }
+      // useEffect(() => {
+      //   if(token!="" && localStorage.getItem('token') || null!=null)
+      //   {
+      //     SetToken(localStorage.getItem('token'));
+      //     console.log("asdfas");
+      //   }
+      //   else{
+      //     <Redirect to="/"  /> 
+      //   }
       
       
-      }, [])
+      // }, [])
 
   useEffect(() => {
       
-    //   console.log(`Token ${token}`);
+      console.log("token updated",token)
  
       axios.get(`https://dbit-lor.herokuapp.com/api/loggedinuserdetails/`, {
         headers: {
@@ -61,11 +58,11 @@ export default function App() {
         <BrowserRouter>
     <Switch>
 
-      <Route path="/admin"   render={(props) => <AdminLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
-      <Route path="/teacher"   render={(props) => <TeacherLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
+      {/* <Route exact path="/admin/lor-request" render={(props) => <LORForm {...props} />} /> */}
+      <Route exact path="/teacher/lor-form" render={(props) => <TeacherSideForm {...props} />} />
+      <Route  path="/admin"   render={(props) => <AdminLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
+      <Route exact path="/teacher"   render={(props) => <TeacherLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
       <Route path="/" render={(props) => <AuthLayout {...props } SetToken={SetToken} />} />
-      <Route path="/admin/lor-request" render={(props) => <LORForm {...props} />} />
-      <Route path="/teacher/lor-form" render={(props) => <TeacherSideForm {...props} />} />
 
 
 
