@@ -57,7 +57,7 @@ const Auth = (props) => {
       }
     });
   };
-
+  // console.log(props);
   return (
     <>
       <div className="main-content" ref={mainContent}>
@@ -95,7 +95,8 @@ const Auth = (props) => {
         {/* Page content */}
         <Container className="mt--8 pb-5">
           <Row className="justify-content-center">
-            <Login SetToken={props.SetToken}  {...props}/>
+           
+            <Login SetToken={props.SetToken} SetUser={props.SetUser} {...props}/>
             {/* <Switch>
               {getRoutes(routes)}
               <Redirect from="*" to="/auth/login" />

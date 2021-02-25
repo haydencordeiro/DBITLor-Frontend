@@ -22,6 +22,18 @@ export default function App() {
           SetToken("");
       }
 
+
+// check if already logged in
+      useEffect(() => {
+        if(localStorage.getItem('token') || null!=null)
+        {
+          SetToken(localStorage.getItem('token'));
+
+        }
+      
+      
+      }, [])
+
   useEffect(() => {
       
     //   console.log(`Token ${token}`);
@@ -48,8 +60,8 @@ export default function App() {
     <Switch>
 
       <Route path="/admin"   render={(props) => <AdminLayout {...props}  SetToken={SetToken} user={user} token={token} />} />
-      <Route path="/" render={(props) => <AuthLayout {...props } SetToken={SetToken} />} />
       <Route path="/admin/lor-request" render={(props) => <LORForm {...props} />} />
+      <Route path="/" render={(props) => <AuthLayout {...props }  SetUser={SetUser}  SetToken={SetToken} />} />
 
 
 

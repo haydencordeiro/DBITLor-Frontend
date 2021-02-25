@@ -52,7 +52,7 @@ const Index = (props) => {
   var [application, SetApplication] = useState([]);
  
   useEffect(() => {
-    var access_token = "53716934355c0e13967ec968a14440c073dcb51f"
+ 
     // console.log(`${process.env.API_URL}api/loggedinteachereditapplications/`);
     
     axios.get(`https://dbit-lor.herokuapp.com/api/loggedinusersapplications/`, {
@@ -62,11 +62,13 @@ const Index = (props) => {
     })
       .then((res) => {
         SetApplication(res.data);
-        // console.log(res.data);
-
+        console.log(res.data);
+     
       })
       .catch((error) => {
-        console.error(error)
+        console.log(props.token);
+
+        console.error(error,"ASdfasdf")
       })
   }, [props.token])
 
@@ -142,13 +144,18 @@ const Index = (props) => {
               </CardHeader>
               <CardBody>
                 <div className="chart">
-                  <div className="verticalTimeline">
+                <div className="verticalTimeline">
+                  {
+                  (application.length!=0)?
+                 
                     <Steps current={LastLorStatus()} vertical style={timelineStyles}>
                       <Steps.Item title="Pending" />
                       <Steps.Item title="Approved" />
                       <Steps.Item title="Complete" />
-                    </Steps>
-                  </div>
+                    </Steps>:null
+                  
+            }
+            </div>
                 </div>
               </CardBody>
             </Card>
