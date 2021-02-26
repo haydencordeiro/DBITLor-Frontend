@@ -45,7 +45,7 @@ const Header = (props) => {
 
           console.log(response.data.downloadLink);
 
-          window.open(response.data.downloadLink, '_blank')
+          window.location=response.data.downloadLink;
         }
       )
       .catch((error) => {
