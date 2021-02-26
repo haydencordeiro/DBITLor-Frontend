@@ -1,5 +1,6 @@
 {
-  "name": "argon-dashboard-react",
+  "name": "dbit-lor",
+  "homepage":"http://grejojoby.github.io/dbit-lor",
   "version": "1.2.0",
   "description": "React version of Argon Dashboard by Creative Tim",
   "main": "index.js",
@@ -22,8 +23,9 @@
   "bugs": {
     "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
   },
-  "homepage": "https://demos.creative-tim.com/argon-dashboard-react/",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -65,6 +67,7 @@
     "rsuite": "^4.9.1"
   },
   "devDependencies": {
+    "gh-pages": "^3.1.0",
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8"
   },
