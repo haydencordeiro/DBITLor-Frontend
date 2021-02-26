@@ -1,28 +1,18 @@
 {
   "name": "dbit-lor",
-  "homepage":"http://grejojoby.github.io/dbit-lor",
+  "homepage": "https://grejojoby.github.io/dbit-lor/",
   "version": "1.2.0",
-  "description": "React version of Argon Dashboard by Creative Tim",
+  "description": "DBIT LOR Process",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/creativetimofficial/argon-dashboard-react.git"
+    "url": "git+https://github.com/grejojoby/dbit-lor.git"
   },
   "keywords": [
-    "react",
-    "reactjs",
-    "argon",
-    "argon-react",
-    "dashboard",
-    "dashboard-react",
-    "argon-dashboard",
-    "argon-dashboard-react"
+    "react"
   ],
-  "author": "Creative Tim",
+  "author": "Grejo Joby",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/creativetimofficial/argon-dashboard-react/issues"
-  },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -31,9 +21,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
-    "compile:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css",
-    "minify:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.min.css --output-style compressed",
-    "map:scss": "node-sass --importer node_modules/node-sass-package-importer/dist/cli.js src/assets/scss/argon-dashboard-react.scss src/assets/css/argon-dashboard-react.css --source-map true",
     "build:scss": "npm run compile:scss && npm run minify:scss && npm run map:scss"
   },
   "eslintConfig": {
