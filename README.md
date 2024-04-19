@@ -18,8 +18,10 @@
 - [Screenshots](#screenshots)
 - [Built with](#built-with)
 - [Authors](#authors)
+- [Frontend](#frontend)
 - [Backend](#backend)
 - [Android App](#android)
+- [Infra Docker](#infra)
 
 
 ## Overview
@@ -72,12 +74,19 @@ and the final LOR can be downloaded by the student.
  [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/grejojoby)  
 
 
-## Backend
-[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/haydencordeiro/DbitLor)  
 
+## Frontend <a id="frontend"></a>
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/haydencordeiro/DBITLor-Frontend)  
+
+## Backend <a id="backend"></a>
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/haydencordeiro/DBITLor-Backend)  
 
 ## Android App <a id="android"></a>
 [![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/haydencordeiro/ReactNativeDBITLOR)  
+
+## Infra [Docker] <a id="infra"></a>
+[![Github](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/haydencordeiro/DbitLorDocker)  
+
 
 
 
